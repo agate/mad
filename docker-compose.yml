@@ -5,6 +5,6 @@ services:
     build: .
     env_file: docker.env
     volumes:
-      - .:/root/mad
+      - .:/opt/mad
     ports:
       - 3000:3000
