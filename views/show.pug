@@ -35,8 +35,10 @@ block content
     - var types = [ 'cpu', 'memory', 'tx', 'rx' ]
     each type in types
       .col-md-6
-        .usage-container
-          .usage-placeholder(class="usage-type-" + type)
+        .usage-container(class="usage-type-" + type)
+          .usage-type= type
+          .usage-placeholder
+        .usage-legend
 
   div
     ul.nav.nav-tabs(role='tablist')

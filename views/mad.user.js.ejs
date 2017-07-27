@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  A Button Lead You To Marathon Application Dashboard
 // @author       agate
-// @match        http://<%= process.env.MARATHON_HOST %><%= process.env.MARATHON_PORT == '80' || !process.env.MARATHON_PORT ? '' : ':'+process.env.MARATHON_PORT %>
+// @match        http://<%= process.env.MARATHON_HOST %><%= process.env.MARATHON_PORT == '80' || !process.env.MARATHON_PORT ? '' : ':'+process.env.MARATHON_PORT %>/*
 // @grant        none
 // ==/UserScript==
 
@@ -20,7 +20,7 @@
             let btnTxt = document.createTextNode("MAD");
             btn.setAttribute("class", "btn btn-lg btn-default");
             btn.style["margin-left"] = "5px";
-            btn.setAttribute("href", MAD_BASE_URL + appId);
+            btn.setAttribute("href", MAD_BASE_URL + "/apps" + appId);
             btn.appendChild(btnTxt);
             parentEle.appendChild(btn);
         }

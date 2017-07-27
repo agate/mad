@@ -4,5 +4,7 @@ services:
     image: agate/mad
     build: .
     env_file: docker.env
+    volumes:
+      - .:/root/mad
     ports:
-      - 3000
+      - 3000:3000

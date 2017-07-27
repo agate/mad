@@ -13,11 +13,12 @@ $(function () {
               'offset': -1,
               'length': -1
             }, options);
-            var url = '/mesos/files/read?path=/var/mesos/slaves/' + task.slave_id + '/frameworks/' + task.framework_id + '/executors/' + task.id + '/runs/' + task.container_id + '/' + file
+            var url = '/mesos/files/read?path=/mnt/storage/mesos/slaves/' + task.slave_id + '/frameworks/' + task.framework_id + '/executors/' + task.id + '/runs/' + task.container_id + '/' + file
               + '&mesos_slave_host=' + task.hostname
               + '&mesos_slave_port=' + task.port
               + '&offset=' + settings.offset
-              + '&length=' + settings.length;
+              + '&length=' + settings.length
+              + '&jsonp=?';
             return $.getJSON(url);
           },
           'indicator': $indicator
@@ -30,11 +31,13 @@ $(function () {
 
     var interval = 5000;
 
-    function initPlot(type) {
-      return $.plot(".usage-placeholder.usage-type-" + type, [], {
-        yaxis: { min: 0 },
-        xaxis: { mode: "time" }
-      });
+    function suffixFormatter(val, axis) {
+      if (val > 1000000)
+        return (val / 1000000).toFixed(axis.tickDecimals) + " MB";
+      else if (val > 1000)
+        return (val / 1000).toFixed(axis.tickDecimals) + " kB";
+      else
+        return val.toFixed(axis.tickDecimals) + " B";
     }
 
     function fetch(range, type, mesos_task_id, callback) {
@@ -60,8 +63,29 @@ $(function () {
           });
         }
 
-        plots[type].plot.setData(plotData);
-        plots[type].plot.draw();
+
+        let options = {
+          yaxis: { min: 0 },
+          xaxis: { mode: "time" },
+          legend: {
+            noColumns: 2,
+            container: $(".usage-type-" + type).parent().find('.usage-legend')
+          },
+          series: {
+            lines: { show: true, fill: true },
+            // points: { show: true }
+          },
+          grid: {
+            hoverable: true,
+            clickable: true
+          }
+        };
+
+        if (type != 'cpu') {
+          options.yaxis.tickFormatter = suffixFormatter;
+        }
+
+        $.plot(".usage-type-" + type + " .usage-placeholder", plotData, options);
 
         setTimeout(function () {
           update(type, mesos_task_id);
@@ -78,7 +102,6 @@ $(function () {
       });
 
       plots[type] = {
-        plot: initPlot(type),
         instances: instances
       };
 
