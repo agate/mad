@@ -1,7 +1,5 @@
 FROM ubuntu:16.04
 
-SHELL ["/bin/bash", "-c"]
-
 RUN apt-get update
 RUN apt-get install -y build-essential libssl-dev curl
 
@@ -14,7 +12,7 @@ ENV MAD_DIR /root/mad
 ADD . /root/mad
 WORKDIR /root/mad
 
-RUN bash -c "source /usr/local/nvm/nvm.sh && nvm install && npm install"
+RUN bash -c "source /usr/local/nvm/nvm.sh; nvm install && npm install"
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["${MAD_DIR}/docker.launch.sh"]
