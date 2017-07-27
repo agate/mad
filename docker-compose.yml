@@ -1,0 +1,8 @@
+version: '2'
+services:
+  mad:
+    image: agate/mad
+    build: .
+    environment:
+    ports:
+      - 3000

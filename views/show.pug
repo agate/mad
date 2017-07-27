@@ -1,0 +1,59 @@
+extends layout.pug
+
+block stylesheets
+  link(href='/stylesheets/show.css', rel='stylesheet')
+
+block javascripts
+  script.
+    window.APP_INFO = !{JSON.stringify(info)};
+  script(src='/javascripts/jquery.pailer.js')
+  script(src='/javascripts/excanvas.min.js')
+  script(src='/javascripts/jquery.pailer.js')
+  script(src='/javascripts/jquery.flot.js')
+  script(src='/javascripts/jquery.flot.time.js')
+  script(src='/javascripts/jquery.flot.navigate.js')
+  script(src='/javascripts/app.js')
+
+block content
+  .row
+    .col-md-12
+      #usage-time-range.btn-group(data-toggle='buttons')
+        label.btn.btn-primary.active
+          input(type='radio', name='options', autocomplete='off', checked='', value='5')
+          |  5 minutes
+        label.btn.btn-primary
+          input(type='radio', name='options', autocomplete='off', checked='', value='15')
+          |  15 minutes
+        label.btn.btn-primary
+          input(type='radio', name='options', autocomplete='off', checked='', value='30')
+          |  30 minutes
+        label.btn.btn-primary
+          input(type='radio', name='options', autocomplete='off', checked='', value='60')
+          |  1 hour
+
+  .row
+    - var types = [ 'cpu', 'memory', 'tx', 'rx' ]
+    each type in types
+      .col-md-6
+        .usage-container
+          .usage-placeholder(class="usage-type-" + type)
+
+  div
+    ul.nav.nav-tabs(role='tablist')
+      each meta, index in info
+        li(role='presentation', class= index == 0 ? 'active' : '')
+          a(href='#std-' + meta.id.replace('.', '-'), role='tab', data-toggle='tab')= meta.id
+    .tab-content
+      each meta, index in info
+        .tab-pane(role='tabpanel', class= index == 0 ? 'active' : '', id="std-" + meta.id.replace('.', '-'))
+          .row
+            .col-md-6(style="height: 500px; overflow: auto")
+              div(id="stdout-" + index, style="position: relative")
+                div.board(style="white-space:pre-wrap;")
+                div(style="position: absolute; left: 5px; top: 0px;")
+                  p.indicator
+            .col-md-6(style="height: 500px; overflow: auto")
+              div(id="stderr-" + index, style="position: relative")
+                div.board(style="white-space:pre-wrap;")
+                div(style="position: absolute; left: 5px; top: 0px;")
+                  p.indicator

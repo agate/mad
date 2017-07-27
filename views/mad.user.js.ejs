@@ -1,0 +1,30 @@
+// ==UserScript==
+// @name         MAD Launcher (<%= process.env.MARATHON_HOST %>)
+// @namespace    https://github.com/agate/mad
+// @version      0.1
+// @description  A Button Lead You To Marathon Application Dashboard
+// @author       agate
+// @match        http://<%= process.env.MARATHON_HOST %><%= process.env.MARATHON_PORT == '80' || !process.env.MARATHON_PORT ? '' : ':'+process.env.MARATHON_PORT %>
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    const MAD_BASE_URL = "http://<%= process.env.MAD_HOST %><%= process.env.MAD_PORT == '80' || !process.env.MAD_PORT ? '' : ':'+process.env.MAD_PORT %>";
+    function attachButton() {
+        let hash = decodeURIComponent(window.location.hash).slice(1);
+        if (hash.match(/\/apps\//)) {
+            let appId = hash.slice(6);
+            let parentEle = document.querySelector('.header-btn');
+            let btn = document.createElement('a');
+            let btnTxt = document.createTextNode("MAD");
+            btn.setAttribute("class", "btn btn-lg btn-default");
+            btn.style["margin-left"] = "5px";
+            btn.setAttribute("href", MAD_BASE_URL + appId);
+            btn.appendChild(btnTxt);
+            parentEle.appendChild(btn);
+        }
+    }
+    window.addEventListener("hashchange", attachButton, false);
+    attachButton();
+})();

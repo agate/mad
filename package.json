@@ -1,0 +1,48 @@
+{
+  "name": "mad",
+  "version": "1.0.0",
+  "description": "marathon application dashboard",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=development `npm bin`/nodemon index.js | `npm bin`/bunyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agate/mad.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agate/mad/issues"
+  },
+  "homepage": "https://github.com/agate/mad#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "ejs": "^2.5.6",
+    "influx": "^5.0.7",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-bunyan-logger": "^2.0.0",
+    "koa-cache-control": "^2.0.0",
+    "koa-onerror": "^3.1.0",
+    "koa-qs": "^2.0.0",
+    "koa-response-time": "^2.0.0",
+    "koa-router": "^7.2.1",
+    "koa-static": "^4.0.1",
+    "koa-views": "^6.0.2",
+    "lodash": "^4.17.4",
+    "pug": "^2.0.0-rc.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "array-flatten": "^2.1.1",
+    "request": "^2.81.0",
+    "zlib": "^1.0.5"
+  }
+}
