@@ -1,4 +1,13 @@
 extends layout.pug
 
 block content
-  h1 Welcome to Marathon Application Dashboard
+  .jumbotron
+    h1 Welcome to MAD
+    p.lead Marathon Application Dashboard
+    p
+      #search.input-group(style="width: 650px; margin-left: auto; margin-right: auto")
+        input.form-control(type="text", placeholder="/your/marathon/app/id")
+        .input-group-btn
+          a.btn.btn-success &nbsp;&nbsp;GO&nbsp;&nbsp;
+    p
+      a.btn.btn-default(href="/mad.user.js" role="button") Download Extension

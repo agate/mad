@@ -13,7 +13,7 @@ $(function () {
               'offset': -1,
               'length': -1
             }, options);
-            var url = '/mesos/files/read?path=/mnt/storage/mesos/slaves/' + task.slave_id + '/frameworks/' + task.framework_id + '/executors/' + task.id + '/runs/' + task.container_id + '/' + file
+            var url = `/mesos/files/read?path=${task.work_dir}/slaves/${task.slave_id}/frameworks/${task.framework_id}/executors/${task.id}/runs/${task.container_id}/${file}`
               + '&mesos_slave_host=' + task.hostname
               + '&mesos_slave_port=' + task.port
               + '&offset=' + settings.offset
@@ -68,7 +68,7 @@ $(function () {
           yaxis: { min: 0 },
           xaxis: { mode: "time" },
           legend: {
-            noColumns: 2,
+            noColumns: window.innerWidth > 1500 ? 2 : 1,
             container: $(".usage-type-" + type).parent().find('.usage-legend')
           },
           series: {

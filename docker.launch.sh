@@ -6,4 +6,4 @@ export NVM_DIR=/usr/local/nvm
 cd $MAD_DIR
 
 nvm use
-npm run dev
+node index.js

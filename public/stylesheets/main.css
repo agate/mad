@@ -40,9 +40,18 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
-.jumbotron .btn {
-  padding: 14px 24px;
-  font-size: 21px;
+
+#search {
+  margin-top: 50px;
+}
+
+#search .form-control {
+  line-height: 2.5;
+  height: 49px;
+  font-size: 18px;
+}
+#search .btn {
+  line-height: 2.5;
 }
 
 /* Supporting marketing content */
@@ -70,4 +79,9 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.container-fluid {
+  padding-left: 30px;
+  padding-right: 30px;
 }
