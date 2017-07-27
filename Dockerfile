@@ -3,13 +3,18 @@ FROM ubuntu:16.04
 SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update
-RUN apt-get install build-essential libssl-dev -y
-RUN apt-get install curl -y
+RUN apt-get install -y build-essential libssl-dev curl
 
-RUN curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh -o install_nvm.sh
-RUN bash install_nvm.sh
+RUN curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | NVM_DIR=/usr/local/nvm bash
 
-WORKDIR /root/
-ADD package.json /root/package.json
+RUN curl -s https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 > /usr/local/bin/dumb-init 
+RUN chmod +x /usr/local/bin/dumb-init
 
-RUN bash -c "source /root/.nvm/nvm.sh && nvm install 8 && npm install"
+ENV MAD_DIR /root/mad
+ADD . /root/mad
+WORKDIR /root/mad
+
+RUN bash -c "source /usr/local/nvm/nvm.sh && nvm install && npm install"
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["${MAD_DIR}/docker.launch.sh"]
