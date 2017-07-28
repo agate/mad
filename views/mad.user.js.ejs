@@ -10,7 +10,7 @@
 
 (function() {
     'use strict';
-    const MAD_BASE_URL = "http://<%= process.env.MAD_HOST %><%= process.env.MAD_PORT == '80' || !process.env.MAD_PORT ? '' : ':'+process.env.MAD_PORT %>";
+    const MAD_BASE_URL = "http://<%= host %>";
     function attachButton() {
         let hash = decodeURIComponent(window.location.hash).slice(1);
         if (hash.match(/\/apps\//)) {
