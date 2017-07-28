@@ -42,3 +42,18 @@
   border: 1px solid #ddd;
   padding: 10px;
 }
+
+.stdwrapper.stdout {
+  color: #006000;
+}
+.stdwrapper.stderr {
+  color: #ab0000;
+}
+
+.stdwrapper > div {
+  position: relative;
+}
+
+#app-id {
+  margin-top: 0;
+}

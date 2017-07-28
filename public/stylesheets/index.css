@@ -1,0 +1,26 @@
+#search {
+  margin-top: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  #search .input-group {
+    width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #search .form-control {
+    line-height: 2.5;
+    height: 49px;
+    font-size: 18px;
+  }
+
+  #search .btn {
+    line-height: 2.5;
+  }
+}
+
+
+#extension {
+  margin-top: 30px;
+}

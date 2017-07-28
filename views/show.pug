@@ -17,7 +17,9 @@ block javascripts
 block content
   .row
     .col-md-6
-      h3= appId
+      h3#app-id
+        - let href = `http://${process.env.MARATHON_HOST}${process.env.MARATHON_PORT == '80' || !process.env.MARATHON_PORT ? '' : ':' + process.env.MARATHON_PORT}/ui/#/apps/${encodeURIComponent(appId)}`
+        a(href=href)= appId
     .col-md-6
       #usage-time-range.btn-group.pull-right(data-toggle='buttons')
         label.btn.btn-primary.active
@@ -34,11 +36,11 @@ block content
           |  1 hour
 
   .row
-    - var types = [ 'cpu', 'memory', 'tx', 'rx' ]
-    each type in types
+    - var types = { cpu: 'CPU', memory: 'Memory', tx: 'Network Transmit', rx: 'Network Receive' }
+    each label, type in types
       .col-md-6
         .usage-container(class="usage-type-" + type)
-          .usage-type= type
+          .usage-type= label
           .usage-placeholder
         .usage-legend
 
@@ -52,14 +54,14 @@ block content
         .tab-pane(role='tabpanel', class= index == 0 ? 'active' : '', id="std-" + meta.id.replace('.', '-'))
           .row
             .col-md-6
-              .stdwrapper
-                div(id="stdout-" + index, style="position: relative")
+              .stdwrapper.stdout
+                div(id="stdout-" + index)
                   div.board(style="white-space:pre-wrap;")
                   div(style="position: absolute; left: 5px; top: 0px;")
                     p.indicator
             .col-md-6
-              .stdwrapper
-                div(id="stderr-" + index, style="position: relative")
+              .stdwrapper.stderr
+                div(id="stderr-" + index)
                   div.board(style="white-space:pre-wrap;")
                   div(style="position: absolute; left: 5px; top: 0px;")
                     p.indicator
