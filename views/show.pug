@@ -48,7 +48,7 @@ block content
     ul.nav.nav-tabs(role='tablist')
       each meta, index in info
         li(role='presentation', class= index == 0 ? 'active' : '')
-          a(href='#std-' + meta.id.replace('.', '-'), role='tab', data-toggle='tab')= meta.id
+          a(href='#std-' + meta.id.replace('.', '-'), role='tab', data-toggle='tab')= meta.id.split('.')[1].split('-')[0]
     .tab-content
       each meta, index in info
         .tab-pane(role='tabpanel', class= index == 0 ? 'active' : '', id="std-" + meta.id.replace('.', '-'))

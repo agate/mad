@@ -30,6 +30,7 @@ $(function () {
   (function () {
 
     var interval = 5000;
+    var $range = $('#usage-time-range label.active input');
 
     function suffixFormatter(val, axis) {
       if (val > 1000000000)
@@ -51,7 +52,7 @@ $(function () {
     }
 
     function update(type, mesos_task_id) {
-      var range = $('#usage-time-range label.active input').val();
+      var range = $range.val();
       fetch(range, type, mesos_task_id, function (data) {
         plots[type].instances[mesos_task_id] = data.map(function(item) {
           return [item.time / 1000000, item.mean]
@@ -61,17 +62,21 @@ $(function () {
         for (var id in plots[type].instances) {
           plotData.push({
             data: plots[type].instances[id],
-            label: mesos_task_id
+            label: id.split('.')[1].split('-')[0]
           });
         }
 
+        let $usageContainer = $(".usage-container.usage-type-" + type);
 
         let options = {
           yaxis: { min: 0 },
           xaxis: { mode: "time" },
+          // legend: {
+            // noColumns: parseInt($usageContainer.width() / 67),
+            // container: $usageContainer.parent().find('.usage-legend')
+          // },
           legend: {
-            noColumns: window.innerWidth > 1500 ? 2 : 1,
-            container: $(".usage-type-" + type).parent().find('.usage-legend')
+            noColumns: Math.ceil(APP_INFO.length / 3)
           },
           series: {
             lines: { show: true, fill: true },
@@ -87,7 +92,7 @@ $(function () {
           options.yaxis.tickFormatter = suffixFormatter;
         }
 
-        $.plot(".usage-type-" + type + " .usage-placeholder", plotData, options);
+        $.plot($usageContainer.find(".usage-placeholder"), plotData, options);
 
         setTimeout(function () {
           update(type, mesos_task_id);
