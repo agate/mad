@@ -54,14 +54,10 @@ block content
         .tab-pane(role='tabpanel', class= index == 0 ? 'active' : '', id="std-" + meta.id.replace('.', '-'))
           .row
             .col-md-6
-              .stdwrapper.stdout
-                div(id="stdout-" + index)
-                  div.board(style="white-space:pre-wrap;")
-                  div(style="position: absolute; left: 5px; top: 0px;")
-                    p.indicator
+              .stdwrapper.stdout(id="stdout-" + index)
+                .board
+                .indicator
             .col-md-6
-              .stdwrapper.stderr
-                div(id="stderr-" + index)
-                  div.board(style="white-space:pre-wrap;")
-                  div(style="position: absolute; left: 5px; top: 0px;")
-                    p.indicator
+              .stdwrapper.stderr(id="stderr-" + index)
+                .board
+                .indicator

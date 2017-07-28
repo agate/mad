@@ -37,7 +37,7 @@
 }
 
 .stdwrapper {
-  height: 500px;
+  position: relative;
   overflow: auto;
   border: 1px solid #ddd;
   padding: 10px;
@@ -50,8 +50,17 @@
   color: #ab0000;
 }
 
-.stdwrapper > div {
-  position: relative;
+.stdwrapper .board {
+  height: 500px;
+}
+
+.stdwrapper .indicator {
+  background: #000000;
+  color: #FFFFFF;
+  left: 5px;
+  position: absolute;
+  text-decoration: none;
+  top: 5px;
 }
 
 #app-id {
