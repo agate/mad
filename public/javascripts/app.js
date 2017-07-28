@@ -30,7 +30,6 @@ $(function () {
   (function () {
 
     var interval = 5000;
-    var $range = $('#usage-time-range label.active input');
 
     function suffixFormatter(val, axis) {
       if (val > 1000000000)
@@ -52,7 +51,7 @@ $(function () {
     }
 
     function update(type, mesos_task_id) {
-      var range = $range.val();
+      var range = $('#usage-time-range label.active input').val();
       fetch(range, type, mesos_task_id, function (data) {
         plots[type].instances[mesos_task_id] = data.map(function(item) {
           return [item.time / 1000000, item.mean]

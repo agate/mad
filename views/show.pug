@@ -22,18 +22,21 @@ block content
         a(href=href)= appId
     .col-md-6
       #usage-time-range.btn-group.pull-right(data-toggle='buttons')
-        label.btn.btn-primary.active
+        label.btn.btn-primary.btn-sm.active
           input(type='radio', name='options', autocomplete='off', checked='', value='5')
-          |  5 minutes
-        label.btn.btn-primary
+          |  5 mins
+        label.btn.btn-primary.btn-sm
           input(type='radio', name='options', autocomplete='off', checked='', value='15')
-          |  15 minutes
-        label.btn.btn-primary
+          |  15 mins
+        label.btn.btn-primary.btn-sm
           input(type='radio', name='options', autocomplete='off', checked='', value='30')
-          |  30 minutes
-        label.btn.btn-primary
+          |  30 mins
+        label.btn.btn-primary.btn-sm
           input(type='radio', name='options', autocomplete='off', checked='', value='60')
           |  1 hour
+        label.btn.btn-primary.btn-sm
+          input(type='radio', name='options', autocomplete='off', checked='', value='1440')
+          |  1 day
 
   .row
     - var types = { cpu: 'CPU', memory: 'Memory', tx: 'Network Transmit', rx: 'Network Receive' }
