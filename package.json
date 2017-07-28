@@ -8,7 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development `npm bin`/nodemon index.js | `npm bin`/bunyan"
+    "dev": "NODE_ENV=development `npm bin`/nodemon index.js | `npm bin`/bunyan",
+    "prod": "npm run prod:start && npm run prod:log",
+    "prod:start": "NODE_ENV=production `npm bin`/pm2 start index.js --name mad",
+    "prod:log": "`npm bin`/pm2 log --raw mad"
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,7 @@
     "koa-static": "^4.0.1",
     "koa-views": "^6.0.2",
     "lodash": "^4.17.4",
+    "pm2": "^2.6.1",
     "pug": "^2.0.0-rc.2"
   },
   "devDependencies": {

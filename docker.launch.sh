@@ -22,4 +22,9 @@ fi
 
 nvm use
 npm install
-node index.js
+
+if [ $MAD_PROD ]; then
+  npm run prod
+else
+  npm run dev
+fi

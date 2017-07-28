@@ -10,10 +10,13 @@ RUN chmod +x /usr/local/bin/dumb-init
 
 ENV TMP_MAD_PATH /tmp/mad
 RUN mkdir $TMP_MAD_PATH
+
 ADD .nvmrc $TMP_MAD_PATH
+RUN bash -c "source /usr/local/nvm/nvm.sh && cd $TMP_MAD_PATH && nvm install"
+
 ADD package-lock.json $TMP_MAD_PATH
 ADD package.json $TMP_MAD_PATH
-RUN bash -c "source /usr/local/nvm/nvm.sh && cd $TMP_MAD_PATH && nvm install && npm install"
+RUN bash -c "source /usr/local/nvm/nvm.sh && cd $TMP_MAD_PATH && npm install"
 
 ADD docker.launch.sh /usr/local/bin
 
