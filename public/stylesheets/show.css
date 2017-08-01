@@ -52,6 +52,7 @@
 
 .stdwrapper .board {
   height: 500px;
+  white-space: pre;
 }
 
 .stdwrapper .indicator {
