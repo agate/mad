@@ -54,7 +54,7 @@ $(function () {
       var range = $('#usage-time-range label.active input').val();
       fetch(range, type, mesos_task_id, function (data) {
         plots[type].instances[mesos_task_id] = data.map(function(item) {
-          return [item.time / 1000000, item.mean]
+          return [item.time, item.value]
         });
 
         var plotData = [];
